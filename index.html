@@ -1,27 +1,20 @@
 <!DOCTYPE html>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Model Viewer AR - VR</title>
-  <meta name="description" content="Model Viewer (VR / AR) • A-Frame">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>>
-  <script src="https://raw.githack.com/jeromeetienne/AR.js/master/aframe/build/aframe-ar.min.js"></script>
-  <script src="https://unpkg.com/aframe-extras@3.3.0/dist/aframe-extras.min.js"></script>
-  <script src="hide-on-enter-ar.js"></script>
-  <script>
-    THREEx.ArToolkitContext.baseURL = 'https://raw.githack.com/jeromeetienne/ar.js/master/three.js/'
+  <title>你的正前方有个球</title>
+
+  <script type="module">
+    import vConsole from "vconsole";
+    new vConsole();
   </script>
+  <script src="aframe.js"></script>
+  <script type='text/javascript' src='ar-threex-location-only.js'></script>
+  <script type='text/javascript' src='aframe-ar.js'></script>
 </head>
 <body>
-<a-scene
-  vr-mode-ui="enabled: false"
-  embedded
-  renderer="colorManagement: true;"
-  info-message="htmlSrc: #messageText"
-  arjs='sourceType: webcam; sourceWidth:1280; sourceHeight:960; displayWidth: 1280; displayHeight: 960; debugUIEnabled: false;'
->
-  <a-entity gltf-model="./assets/magnemite/scene.gltf" rotation="0 180 0" scale="0.15 0.15 0.15" gps-entity-place="longitude: 120.210545; latitude: 30.188680;" animation-mixer/>
-  <a-camera gps-camera rotation-reader></a-camera>
+<a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
+  <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+  <a-entity material='color: red' geometry='primitive: box' gps-new-entity-place="longitude: 120.209545; latitude: 30.187680;" scale="10 10 10"></a-entity>
 </a-scene>
 </body>
 </html>
