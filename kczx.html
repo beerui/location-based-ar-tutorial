@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>你的正前方有个球</title>
+
+  <script type="module">
+    import vConsole from "vconsole";
+    new vConsole();
+  </script>
+  <script src="aframe.js"></script>
+  <script type='text/javascript' src='ar-threex-location-only.js'></script>
+  <script type='text/javascript' src='aframe-ar.js'></script>
+</head>
+<body>
+<a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
+  <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+  <a-entity material='color: red' geometry='primitive: sphere' gps-new-entity-place="longitude: 120.26596; latitude: 30.186006;" scale="60 60 60"></a-entity>
+</a-scene>
+</body>
+</html>
