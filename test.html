@@ -20,17 +20,17 @@
 			el = document.querySelector("[gps-new-camera]");
 			theSphere = document.querySelector("#theSphere");
 			
-			el.addEventListener("gps-camera-update-position", async(e) => {
-					const west = e.detail.position.longitude - 0.01,
-						south = e.detail.position.latitude - 0.01;
-					
-					theSphere.setAttribute('gps-new-entity-place', {
-						latitude: south,
-						longitude: west
-					});
-					console.log('longitude,latitude', e.detail.position)
-					console.log('ball longitude,latitude', south, west)
-			});
+			// el.addEventListener("gps-camera-update-position", async(e) => {
+			// 		const west = e.detail.position.longitude - 0.01,
+			// 			south = e.detail.position.latitude - 0.01;
+			//
+			// 		theSphere.setAttribute('gps-new-entity-place', {
+			// 			latitude: south,
+			// 			longitude: west
+			// 		});
+			// 		console.log('longitude,latitude', e.detail.position)
+			// 		console.log('ball longitude,latitude', south, west)
+			// });
 			
 			bigFn = () => {
 				++scale
