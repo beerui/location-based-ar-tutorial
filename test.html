@@ -56,8 +56,8 @@
 				console.log(position.coords.latitude, position.coords.longitude);
 				
 				theSphere.setAttribute('gps-new-entity-place', {
-					latitude: position.coords.latitude - 0.001,
-					longitude: position.coords.longitude - 0.001
+					latitude: position.coords.latitude,
+					longitude: position.coords.longitude
 				});
 			});
 		}
