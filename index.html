@@ -5,6 +5,11 @@
   <script src="aframe.js"></script>
   <script type='text/javascript' src='ar-threex-location-only.js'></script>
   <script type='text/javascript' src='aframe-ar.js'></script>
+	<script src="https://unpkg.com/vconsole@latest/dist/vconsole.min.js"></script>
+	<script>
+		// VConsole will be exported to `window.VConsole` by default.
+		var vConsole = new window.VConsole();
+	</script>
 </head>
 <body>
 <a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
