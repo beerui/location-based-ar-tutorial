@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>test</title>
+  <script src="aframe.js"></script>
+  <script type='text/javascript' src='ar-threex-location-only.js'></script>
+  <script type='text/javascript' src='aframe-ar.js'></script>
+	<script>
+		let theSphere;
+		let scale = 10;
+		let bigFn;
+		let smallFn;
+		window.onload = () => {
+			const el = document.querySelector("[gps-new-camera]");
+			theSphere = document.querySelector("#theSphere");
+			
+			el.addEventListener("gps-camera-update-position", async(e) => {
+					const west = e.detail.position.longitude - 0.01,
+						east = e.detail.position.longitude + 0.01,
+						south = e.detail.position.latitude - 0.01;
+					north = e.detail.position.latitude + 0.01;
+					
+					theSphere.setAttribute('gps-new-entity-place', {
+						latitude: south,
+						longitude: west
+					});
+					console.log('我的经纬度：', e.detail.position)
+					console.log('球的经纬度：', south, west)
+			});
+			
+			bigFn = () => {
+				scale+=scale
+				theSphere.setAttribute('scale', {
+					x: scale,
+					y: scale,
+					z: scale
+				});
+			}
+			smallFn = () => {
+				scale-=scale
+				theSphere.setAttribute('scale', {
+					x: scale,
+					y: scale,
+					z: scale
+				});
+			}
+		};
+	</script>
+</head>
+<body>
+<div style="border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 10px;" id="big" onclick="bigFn()">big</div>
+<div style="border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 100px;" id="small" onclick="smallFn()">sma-ll</div>
+<a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
+  <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
+  <a-entity id="theSphere" material='color: red' geometry='primitive: sphere' gps-new-entity-place="longitude: 120.270334; latitude: 30.145415;" scale="10 10 10"></a-entity>
+</a-scene>
+</body>
+</html>
