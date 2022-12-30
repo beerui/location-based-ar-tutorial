@@ -33,7 +33,7 @@
 			});
 			
 			bigFn = () => {
-				scale+=scale
+				++scale
 				theSphere.setAttribute('scale', {
 					x: scale,
 					y: scale,
@@ -42,7 +42,7 @@
 				console.log('scale', scale)
 			}
 			smallFn = () => {
-				scale-=scale
+				--scale
 				theSphere.setAttribute('scale', {
 					x: scale,
 					y: scale,
@@ -56,8 +56,8 @@
 				console.log(position.coords.latitude, position.coords.longitude);
 				
 				theSphere.setAttribute('gps-new-entity-place', {
-					latitude: position.coords.latitude - 0.01,
-					longitude: position.coords.longitude - 0.01
+					latitude: position.coords.latitude - 0.001,
+					longitude: position.coords.longitude - 0.001
 				});
 			});
 		}
@@ -66,7 +66,7 @@
 <body>
 <div style="cursor: pointer;user-select: none;border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 10px;" onclick="bigFn()">big</div>
 <div style="cursor: pointer;user-select: none;border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 100px;" id="small" onclick="smallFn()">sma-ll</div>
-<div style="cursor: pointer;user-select: none;border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 200px;" onclick="changeLonLat()">getLonLat</div>
+<div style="cursor: pointer;user-select: none;border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 200px;" onclick="changeLonLat()">设置球的坐标为自己的前方-0.01</div>
 <a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
   <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
   <a-entity id="theSphere" material='color: red' geometry='primitive: box' gps-new-entity-place="longitude: 120.270334; latitude: 30.145415;" scale="100 100 100"></a-entity>
