@@ -15,15 +15,14 @@
 		let scale = 10;
 		let bigFn;
 		let smallFn;
+		let el;
 		window.onload = () => {
-			const el = document.querySelector("[gps-new-camera]");
+			el = document.querySelector("[gps-new-camera]");
 			theSphere = document.querySelector("#theSphere");
 			
 			el.addEventListener("gps-camera-update-position", async(e) => {
 					const west = e.detail.position.longitude - 0.01,
-						east = e.detail.position.longitude + 0.01,
 						south = e.detail.position.latitude - 0.01;
-					north = e.detail.position.latitude + 0.01;
 					
 					theSphere.setAttribute('gps-new-entity-place', {
 						latitude: south,
@@ -52,14 +51,25 @@
 				console.log('scale', scale)
 			}
 		};
+		function changeLonLat() {
+			navigator.geolocation.getCurrentPosition((position) => {
+				console.log(position.coords.latitude, position.coords.longitude);
+				
+				theSphere.setAttribute('gps-new-entity-place', {
+					latitude: position.coords.latitude - 0.01,
+					longitude: position.coords.longitude - 0.01
+				});
+			});
+		}
 	</script>
 </head>
 <body>
-<div style="cursor: pointer;user-select: none;border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 10px;" id="big" onclick="bigFn()">big</div>
+<div style="cursor: pointer;user-select: none;border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 10px;" onclick="bigFn()">big</div>
 <div style="cursor: pointer;user-select: none;border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 100px;" id="small" onclick="smallFn()">sma-ll</div>
+<div style="cursor: pointer;user-select: none;border: 1px solid #000;position: fixed;z-index: 999;padding: 15px 50px;left: 0;top: 200px;" onclick="changeLonLat()">getLonLat</div>
 <a-scene vr-mode-ui='enabled: false' arjs='sourceType: webcam; videoTexture: true; debugUIEnabled: false' renderer='antialias: true; alpha: true'>
   <a-camera gps-new-camera='gpsMinDistance: 5'></a-camera>
-  <a-entity id="theSphere" material='color: red' geometry='primitive: sphere' gps-new-entity-place="longitude: 120.270334; latitude: 30.145415;" scale="10 10 10"></a-entity>
+  <a-entity id="theSphere" material='color: red' geometry='primitive: sphere' gps-new-entity-place="longitude: 120.270334; latitude: 30.145415;" scale="100 100 100"></a-entity>
 </a-scene>
 </body>
 </html>
